@@ -93,4 +93,6 @@ public class SearchByIdDialog extends JDialog implements ActionListener {
 		else if (e.getSource() == cancel)
 			dispose();
 	}// end actionPerformed
+	
+	
 }// end class searchByIdDialog
