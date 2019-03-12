@@ -16,8 +16,7 @@ public class Employee{
 
 	// Create Employee with no details
 	public Employee() {
-
-	}//end Employee with no details
+	}
 
 	// Create Employee with details
 	public Employee(int employeeId, String pps, String surname, String firstName, char gender, String department, double salary,
