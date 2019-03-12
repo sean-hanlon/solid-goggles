@@ -652,12 +652,12 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 	public boolean correctPps(String pps, long currentByte) {
 		boolean ppsExist = false;
 		// check for correct PPS format based on assignment description
-		if (pps.length() == 7 || pps.length() < 8) {
+		if (pps.length() == 7 ) {
 			if (Character.isDigit(pps.charAt(0)) && Character.isDigit(pps.charAt(1))
 					&& Character.isDigit(pps.charAt(2))	&& Character.isDigit(pps.charAt(3)) 
 					&& Character.isDigit(pps.charAt(4))	&& Character.isDigit(pps.charAt(5)) 
-					&& Character.isDigit(pps.charAt(6))	&& Character.isLetter(pps.charAt(7))
-					) {
+					&& Character.isLetter(pps.charAt(6))	)
+				 {
 				// open file for reading
 				application.openReadFile(file.getAbsolutePath());
 				// look in file is PPS already in use
@@ -676,12 +676,15 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 	// check if file name has extension .dat
 	private boolean checkFileName(File fileName) {
 		boolean checkFile = false;
-		int length = fileName.toString().length();
+		//int length = fileName.toString().length();
+		String file = fileName.toString();
+		if(file.endsWith(".dat"))
+			checkFile=true;
 
-		// check if last characters in file name is .dat
+		/*// check if last characters in file name is .dat
 		if (fileName.toString().charAt(length - 4) == '.' && fileName.toString().charAt(length - 3) == 'd'
 				&& fileName.toString().charAt(length - 2) == 'a' && fileName.toString().charAt(length - 1) == 't')
-			checkFile = true;
+			checkFile = true;*/
 		return checkFile;
 	}// end checkFileName
 
