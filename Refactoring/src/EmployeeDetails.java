@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Vector;
 
@@ -339,10 +340,10 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 	}// end display records
 
 	// display Employee summary dialog
-	private void displayEmployeeSummaryDialog() {
+	public void displayEmployeeSummaryDialog() {
 		// display Employee summary dialog if these is someone to display
 		if (isSomeoneToDisplay())
-			new EmployeeSummaryDialog(getAllEmloyees());
+			new EmployeeSummaryDialog(getAllEmployees());
 	}// end displaySummaryDialog
 
 	// display search by ID dialog
@@ -577,36 +578,57 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		} // end if
 	}// end deleteDecord
 
-	// create vector of vectors with all Employee details
-	private Vector<Object> getAllEmloyees() {
-		// vector of Employee objects
-		Vector<Object> allEmployee = new Vector<Object>();
-		Vector<Object> empDetails;// vector of each employee details
+	/*// create vector of vectors with all Employee details
+	public Vector getAllEmployees() {
+		ArrayList<Employee> allEmployees = new ArrayList<Employee>();
 		long byteStart = currentByteStart;
 		int firstId;
-
-		firstRecord();// look for first record
+		firstRecord();
 		firstId = currentEmployee.getEmployeeId();
 		// loop until all Employees are added to vector
 		do {
-			empDetails = new Vector<Object>();
-			empDetails.addElement(new Integer(currentEmployee.getEmployeeId()));
-			empDetails.addElement(currentEmployee.getPps());
-			empDetails.addElement(currentEmployee.getSurname());
-			empDetails.addElement(currentEmployee.getFirstName());
-			empDetails.addElement(new Character(currentEmployee.getGender()));
-			empDetails.addElement(currentEmployee.getDepartment());
-			empDetails.addElement(new Double(currentEmployee.getSalary()));
-			empDetails.addElement(new Boolean(currentEmployee.getFullTime()));
-
-			allEmployee.addElement(empDetails);
-			nextRecord();// look for next record
-		} while (firstId != currentEmployee.getEmployeeId());// end do - while
+			Employee emp = new Employee(new Integer(currentEmployee.getEmployeeId()),currentEmployee.getPps(),currentEmployee.getSurname()
+					,currentEmployee.getFirstName(),new Character(currentEmployee.getGender()),currentEmployee.getDepartment(),new Double(currentEmployee.getSalary())
+					,new Boolean(currentEmployee.getFullTime()));
+			allEmployees.add(emp);
+			nextRecord();
+		} while (firstId != currentEmployee.getEmployeeId());
 		currentByteStart = byteStart;
-
-		return allEmployee;
+		return new Vector<Employee>(allEmployees);
+		//return allEmployees;
 	}// end getAllEmployees
+*/
+	
+	// create vector of vectors with all Employee details
+	private Vector<Object> getAllEmployees() {
+			// vector of Employee objects
+			Vector<Object> allEmployee = new Vector<Object>();
+			Vector<Object> empDetails;// vector of each employee details
+			long byteStart = currentByteStart;
+			int firstId;
 
+			firstRecord();// look for first record
+			firstId = currentEmployee.getEmployeeId();
+			// loop until all Employees are added to vector
+			do {
+				empDetails = new Vector<Object>();
+				empDetails.addElement(new Integer(currentEmployee.getEmployeeId()));
+				empDetails.addElement(currentEmployee.getPps());
+				empDetails.addElement(currentEmployee.getSurname());
+				empDetails.addElement(currentEmployee.getFirstName());
+				empDetails.addElement(new Character(currentEmployee.getGender()));
+				empDetails.addElement(currentEmployee.getDepartment());
+				empDetails.addElement(new Double(currentEmployee.getSalary()));
+				empDetails.addElement(new Boolean(currentEmployee.getFullTime()));
+
+				allEmployee.addElement(empDetails);
+				nextRecord();// look for next record
+			} while (firstId != currentEmployee.getEmployeeId());// end do - while
+			currentByteStart = byteStart;
+
+			return allEmployee;
+	}// end getAllEmployees
+		
 	// activate field for editing
 	private void editDetails() {
 		// activate field for editing if there is records to display
@@ -652,12 +674,13 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 	public boolean correctPps(String pps, long currentByte) {
 		boolean ppsExist = false;
 		// check for correct PPS format based on assignment description
-		if (pps.length() == 7 ) {
+		if (pps.length() == 7 ) 
+		{
 			if (Character.isDigit(pps.charAt(0)) && Character.isDigit(pps.charAt(1))
 					&& Character.isDigit(pps.charAt(2))	&& Character.isDigit(pps.charAt(3)) 
 					&& Character.isDigit(pps.charAt(4))	&& Character.isDigit(pps.charAt(5)) 
-					&& Character.isLetter(pps.charAt(6))	)
-				 {
+					&& Character.isLetter(pps.charAt(6)))
+			{
 				// open file for reading
 				application.openReadFile(file.getAbsolutePath());
 				// look in file is PPS already in use
