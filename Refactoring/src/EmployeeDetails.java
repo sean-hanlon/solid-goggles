@@ -577,27 +577,6 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			} // end if
 		} // end if
 	}// end deleteDecord
-
-	/*// create vector of vectors with all Employee details
-	public Vector getAllEmployees() {
-		ArrayList<Employee> allEmployees = new ArrayList<Employee>();
-		long byteStart = currentByteStart;
-		int firstId;
-		firstRecord();
-		firstId = currentEmployee.getEmployeeId();
-		// loop until all Employees are added to vector
-		do {
-			Employee emp = new Employee(new Integer(currentEmployee.getEmployeeId()),currentEmployee.getPps(),currentEmployee.getSurname()
-					,currentEmployee.getFirstName(),new Character(currentEmployee.getGender()),currentEmployee.getDepartment(),new Double(currentEmployee.getSalary())
-					,new Boolean(currentEmployee.getFullTime()));
-			allEmployees.add(emp);
-			nextRecord();
-		} while (firstId != currentEmployee.getEmployeeId());
-		currentByteStart = byteStart;
-		return new Vector<Employee>(allEmployees);
-		//return allEmployees;
-	}// end getAllEmployees
-*/
 	
 	// create vector of vectors with all Employee details
 	private Vector<Object> getAllEmployees() {
@@ -1135,23 +1114,10 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		exitApp();
 	}
 
-	
-
-	public void windowActivated(WindowEvent e) {
-	}
-
-	public void windowClosed(WindowEvent e) {
-	}
-
-	public void windowDeactivated(WindowEvent e) {
-	}
-
-	public void windowDeiconified(WindowEvent e) {
-	}
-
-	public void windowIconified(WindowEvent e) {
-	}
-
-	public void windowOpened(WindowEvent e) {
-	}
+	public void windowActivated(WindowEvent e) {}
+	public void windowClosed(WindowEvent e) {}
+	public void windowDeactivated(WindowEvent e) {}
+	public void windowDeiconified(WindowEvent e) {}
+	public void windowIconified(WindowEvent e) {}
+	public void windowOpened(WindowEvent e) {}
 }// end class EmployeeDetails
