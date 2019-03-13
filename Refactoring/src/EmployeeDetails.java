@@ -676,10 +676,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		// check for correct PPS format based on assignment description
 		if (pps.length() == 7 ) 
 		{
-			if (Character.isDigit(pps.charAt(0)) && Character.isDigit(pps.charAt(1))
-					&& Character.isDigit(pps.charAt(2))	&& Character.isDigit(pps.charAt(3)) 
-					&& Character.isDigit(pps.charAt(4))	&& Character.isDigit(pps.charAt(5)) 
-					&& Character.isLetter(pps.charAt(6)))
+			if (pps.matches("[0-9][0-9][0-9][0-9][0-9][0-9][a-zA-Z]"))
 			{
 				// open file for reading
 				application.openReadFile(file.getAbsolutePath());
