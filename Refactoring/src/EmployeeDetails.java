@@ -283,7 +283,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 				field.getDocument().addDocumentListener(this);
 			} // end if
 			else if (empDetails.getComponent(i) instanceof JComboBox) {
-				empDetails.getComponent(i).setBackground(Color.WHITE);
+				empDetails.getComponent(i).setBackground(ColourClass.white);
 				empDetails.getComponent(i).setEnabled(false);
 				((JComboBox<String>) empDetails.getComponent(i)).addItemListener(this);
 				((JComboBox<String>) empDetails.getComponent(i)).setRenderer(new DefaultListCellRenderer() {
@@ -477,7 +477,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			searchByIdField.setBackground(ColourClass.red);
 			JOptionPane.showMessageDialog(null, "Wrong ID format!");
 		} // end catch
-		searchByIdField.setBackground(Color.WHITE);
+		searchByIdField.setBackground(ColourClass.white);
 		searchByIdField.setText("");
 	}// end searchEmployeeByID
 

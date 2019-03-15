@@ -91,7 +91,7 @@ public class AddRecordDialog extends JDialog implements ActionListener {
 		for (int i = 0; i < empDetails.getComponentCount(); i++) {
 			empDetails.getComponent(i).setFont(this.parent.font1);
 			if (empDetails.getComponent(i) instanceof JComboBox) {
-				empDetails.getComponent(i).setBackground(Color.WHITE);
+				empDetails.getComponent(i).setBackground(ColourClass.white);
 			}// end if
 			else if(empDetails.getComponent(i) instanceof JTextField){
 				field = (JTextField) empDetails.getComponent(i);
@@ -170,13 +170,13 @@ public class AddRecordDialog extends JDialog implements ActionListener {
 
 	// set text field to white colour
 	public void setToWhite() {
-		ppsField.setBackground(Color.WHITE);
-		surnameField.setBackground(Color.WHITE);
-		firstNameField.setBackground(Color.WHITE);
-		salaryField.setBackground(Color.WHITE);
-		genderCombo.setBackground(Color.WHITE);
-		departmentCombo.setBackground(Color.WHITE);
-		fullTimeCombo.setBackground(Color.WHITE);
+		ppsField.setBackground(ColourClass.white);
+		surnameField.setBackground(ColourClass.white);
+		firstNameField.setBackground(ColourClass.white);
+		salaryField.setBackground(ColourClass.white);
+		genderCombo.setBackground(ColourClass.white);
+		departmentCombo.setBackground(ColourClass.white);
+		fullTimeCombo.setBackground(ColourClass.white);
 	}// end setToWhite
 
 	// action performed
