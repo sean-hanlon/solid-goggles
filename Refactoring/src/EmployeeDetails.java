@@ -1057,7 +1057,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 
 		setJMenuBar(menuBar());// add menu bar to frame
 		// add search panel to frame
-		dialog.add(searchPanel(), "width 400:400:400, Layout.grow, Layout.push");
+		dialog.add(searchPanel(), "width 400:400:400, "+Layout.mig_layout2);
 		// add navigation panel to frame
 		dialog.add(navigPanel(), "width 150:150:150, Layout.grow");
 		// add button panel to frame
