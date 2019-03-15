@@ -46,7 +46,7 @@ public class RandomAccessEmployeeRecord extends Employee
       {
          temp = file.readChar();
          name[ count ] = temp;
-      } // end for     
+      }       
       
       return new String( name ).replace( '\0', ' ' );
    } // end readName

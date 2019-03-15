@@ -281,7 +281,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 				else
 					field.setDocument(new JTextFieldLimit(20));
 				field.getDocument().addDocumentListener(this);
-			} // end if
+			}  
 			else if (empDetails.getComponent(i) instanceof JComboBox) {
 				empDetails.getComponent(i).setBackground(ColourClass.white);
 				empDetails.getComponent(i).setEnabled(false);
@@ -293,7 +293,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 						super.paint(g);
 					}// end paint
 				});
-			} // end else if
+			}  
 		} // end for
 		return empDetails;
 	}// end detailsPanel
@@ -374,7 +374,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			// if first record is inactive look for next record
 			if (currentEmployee.getEmployeeId() == 0)
 				nextRecord();// look for next record
-		} // end if
+		}  
 	}// end firstRecord
 
 	// find byte start in file for previous active record
@@ -416,7 +416,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 				currentEmployee = application.readRecords(currentByteStart);
 			} // end while
 			application.closeReadFile();// close file for reading
-		} // end if
+		}  
 	}// end nextRecord
 
 	// find byte start in file for last active record
@@ -433,7 +433,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			// if last record is inactive look for previous record
 			if (currentEmployee.getEmployeeId() == 0)
 				previousRecord();// look for previous record
-		} // end if
+		}  
 	}// end lastRecord
 
 	// search Employee by ID
@@ -452,7 +452,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 				else if (searchByIdField.getText().trim().equals(Integer.toString(currentEmployee.getEmployeeId()))) {
 					found = true;
 					displayRecords(currentEmployee);
-				} // end else if
+				}  
 				else {
 					nextRecord();// look for next record
 					// loop until Employee found or until all Employees have
@@ -467,11 +467,11 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 						} else
 							nextRecord();// look for next record
 					} // end while
-				} // end else
+				}  
 					// if Employee not found display message
 				if (!found)
 					JOptionPane.showMessageDialog(null, "Employee not found!");
-			} // end if
+			}  
 		} // end try
 		catch (NumberFormatException e) {
 			searchByIdField.setBackground(ColourClass.red);
@@ -495,7 +495,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			else if (searchBySurnameField.getText().trim().equalsIgnoreCase(currentEmployee.getSurname().trim())) {
 				found = true;
 				displayRecords(currentEmployee);
-			} // end else if
+			}  
 			else {
 				nextRecord();// look for next record
 				// loop until Employee found or until all Employees have been
@@ -507,15 +507,15 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 						found = true;
 						displayRecords(currentEmployee);
 						break;
-					} // end if
+					}  
 					else
 						nextRecord();// look for next record
 				} // end while
-			} // end else
+			}  
 				// if Employee not found display message
 			if (!found)
 				JOptionPane.showMessageDialog(null, "Employee not found!");
-		} // end if
+		}  
 		searchBySurnameField.setText("");
 	}// end searchEmployeeBySurname
 
@@ -575,9 +575,9 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 				if (isSomeoneToDisplay()) {
 					nextRecord();// look for next record
 					displayRecords(currentEmployee);
-				} // end if
-			} // end if
-		} // end if
+				}  
+			}  
+		}  
 	}// end deleteDecord
 	
 	// create vector of vectors with all Employee details
@@ -618,7 +618,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			salaryField.setText(fieldFormat.format(currentEmployee.getSalary()));
 			change = false;
 			setEnabled(true);// enable text fields for editing
-		} // end if
+		}  
 	}// end editDetails
 
 	// ignore changes and set text field unenabled
@@ -664,10 +664,10 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 				// look in file is PPS already in use
 				ppsExist = application.isPpsExist(pps, currentByte);
 				application.closeReadFile();// close file for reading
-			} // end if
+			}  
 			else
 				ppsExist = true;
-		} // end if
+		}  
 		else
 			ppsExist = true;
 
@@ -690,13 +690,13 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		if (change) {
 			saveChanges();// save changes
 			anyChanges = true;
-		} // end if
+		}  
 			// if no changes made, set text fields as unenabled and display
 			// current Employee
 		else {
 			setEnabled(false);
 			displayRecords(currentEmployee);
-		} // end else
+		}  
 
 		return anyChanges;
 	}// end checkForChanges
@@ -706,32 +706,32 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 
 		Validator v = new Validator();
 		boolean valid = v.validate(ppsField, surnameField, firstNameField, genderCombo, departmentCombo);
-		
-		try {// try to get values from text field
-			Double.parseDouble(salaryField.getText());
-			// check if salary is greater than 0
-			if (Double.parseDouble(salaryField.getText()) < 0) {
-				salaryField.setBackground(ColourClass.red);
+		if (valid){
+			try {// try to get values from text field
+				Double.parseDouble(salaryField.getText());
+				// check if salary is greater than 0
+				if (Double.parseDouble(salaryField.getText()) < 0) {
+					salaryField.setBackground(ColourClass.red);
+					valid = false;
+				}  
+			} // end try
+			catch (NumberFormatException num) {
+				if (salaryField.isEditable()) {
+					salaryField.setBackground(ColourClass.red);
+					valid = false;
+				}  
+			} // end catch
+			if (fullTimeCombo.getSelectedIndex() == 0 && fullTimeCombo.isEnabled()) {
+				fullTimeCombo.setBackground(ColourClass.red);
 				valid = false;
-			} // end if
-		} // end try
-		catch (NumberFormatException num) {
-			if (salaryField.isEditable()) {
-				salaryField.setBackground(ColourClass.red);
-				valid = false;
-			} // end if
-		} // end catch
-		if (fullTimeCombo.getSelectedIndex() == 0 && fullTimeCombo.isEnabled()) {
-			fullTimeCombo.setBackground(ColourClass.red);
-			valid = false;
-		} // end if
-			// display message if any input or format is wrong
-		if (!valid)
-			JOptionPane.showMessageDialog(null, "Wrong values or format! Please check!");
-		// set text field to white colour if text fields are editable
-		if (ppsField.isEditable())
-			setToWhite();
-
+			}  
+				// display message if any input or format is wrong
+			if (!valid)
+				JOptionPane.showMessageDialog(null, "Wrong values or format! Please check!");
+			// set text field to white colour if text fields are editable
+			if (ppsField.isEditable())
+				setToWhite();
+		}
 		return valid;
 	}
 
@@ -783,8 +783,8 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			// if user wants to save file, save it
 			if (returnVal == JOptionPane.YES_OPTION) {
 				saveFile();// save file
-			} // end if
-		} // end if
+			}  
+		}  
 
 		int returnVal = fc.showOpenDialog(EmployeeDetails.this);
 		// if file been chosen, open it
@@ -800,7 +800,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			firstRecord();// look for first record
 			displayRecords(currentEmployee);
 			application.closeReadFile();// close file for reading
-		} // end if
+		}  
 	}// end openFile
 
 	// save file
@@ -827,13 +827,13 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 						// record
 						application.changeRecords(currentEmployee, currentByteStart);
 						application.closeWriteFile();// close file for writing
-					} // end if
-				} // end if
-			} // end if
+					}  
+				}  
+			}  
 
 			displayRecords(currentEmployee);
 			setEnabled(false);
-		} // end else
+		}  
 	}// end saveFile
 
 	// save changes to current Employee
@@ -850,7 +850,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			application.changeRecords(currentEmployee, currentByteStart);
 			application.closeWriteFile();// close file for writing
 			changesMade = false;// state that all changes has bee saved
-		} // end if
+		}  
 		displayRecords(currentEmployee);
 		setEnabled(false);
 	}// end saveChanges
@@ -890,7 +890,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			} // end try
 			catch (IOException e) {
 			} // end catch
-		} // end if
+		}  
 		changesMade = false;
 	}// end saveFileAs
 
@@ -908,29 +908,29 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 					if (file.getName().equals(generatedFileName))
 						file.delete();// delete file
 					System.exit(0);// exit application
-				} // end if
+				}  
 					// else exit application
 				else if (returnVal == JOptionPane.NO_OPTION) {
 					// delete generated file if user chooses not to save file
 					if (file.getName().equals(generatedFileName))
 						file.delete();// delete file
 					System.exit(0);// exit application
-				} // end else if
-			} // end if
+				}  
+			}  
 			else {
 				// delete generated file if user chooses not to save file
 				if (file.getName().equals(generatedFileName))
 					file.delete();// delete file
 				System.exit(0);// exit application
-			} // end else
+			}  
 				// else exit application
 		} else {
 			// delete generated file if user chooses not to save file
 			if (file.getName().equals(generatedFileName))
 				file.delete();// delete file
 			System.exit(0);// exit application
-		} // end else
-	}// end exitApp
+		}  
+	} 
 
 	// generate 20 character long file name
 	private String getFileName() {
